@@ -8,6 +8,8 @@
 
 _Built around one moment: the needle finding the groove._
 
+**[🔗 Live Demo](https://melihfidan-lathe.vercel.app)**
+
 ![React](https://img.shields.io/badge/React_19-2a0d10?style=flat-square&logo=react&logoColor=61DAFB)
 ![Vite](https://img.shields.io/badge/Vite_8-2a0d10?style=flat-square&logo=vite&logoColor=FFD62E)
 ![Three.js](https://img.shields.io/badge/Three.js-2a0d10?style=flat-square&logo=threedotjs&logoColor=ede6da)
