@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "@fontsource-variable/bricolage-grotesque/standard.css";
+@import "@fontsource-variable/newsreader/standard.css";
+@import "lenis/dist/lenis.css";
+
+@theme {
+  --breakpoint-xl: 90rem;
+  --breakpoint-2xl: 120rem;
+
+  /* Lathe paleti — renkler ürünün materyallerinden gelir */
+  --color-oxblood: #2a0d10;
+  --color-oxblood-deep: #1a0709;
+  --color-oxblood-raised: #3a1418;
+  --color-aluminum: #d8d6d0;
+  --color-walnut: #6b4027;
+  --color-label: #f0b429;
+  --color-paper: #ede6da;
+
+  --font-display: "Bricolage Grotesque Variable", "Arial Narrow", sans-serif;
+  --font-body: "Newsreader Variable", Georgia, serif;
+
+  /* Poster ölçeği: mobilde tek kelime ekranı doldurur.
+     min(vw, svh): geniş ama alçak ekranlarda (laptop + dock) yazı yüksekliğe sığar */
+  --text-poster: clamp(4rem, min(1rem + 21vw, 27svh), 17rem);
+  --text-poster--line-height: 0.82;
+  --text-display: clamp(2.75rem, min(1.5rem + 9vw, 15svh), 10rem);
+  --text-display--line-height: 0.86;
+  --text-h2: clamp(2rem, min(1.4rem + 3.6vw, 8.5svh), 4.75rem);
+  --text-h2--line-height: 0.95;
+  --text-lede: clamp(1.25rem, 1.1rem + 0.6vw, 1.625rem);
+  --text-lede--line-height: 1.38;
+  --text-body: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+  --text-body--line-height: 1.55;
+  --text-small: 0.875rem;
+  --text-small--line-height: 1.4;
+
+  /* Kenar boşluğu: telefonda 20px → laptopta ~56px → en fazla 88px.
+     max(): çok geniş ekranlarda içerik 1760px'i aşmasın diye boşluk büyümeye devam eder */
+  --spacing-gutter: max(clamp(1.25rem, 4vw, 5.5rem), calc((100vw - 110rem) / 2));
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* Sahne renkleri GSAP tarafından anime edilir (A yüzü koyu → B yüzü açık), bu yüzden @theme inline */
+:root {
+  --stage: #2a0d10;
+  --ink: #ede6da;
+  --ink-soft: color-mix(in oklab, var(--ink) 72%, var(--stage));
+}
+@theme inline {
+  --color-stage: var(--stage);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+}
+
+@layer base {
+  html {
+    background: var(--stage);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body--line-height);
+    background: var(--stage);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-label);
+    color: var(--color-oxblood);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-label);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+}
+
+/* Vanilla CSS: SplitText satır maskesi — Tailwind sınıfı SplitText'in ürettiği elemanlara verilemez */
+.split-mask {
+  overflow: clip;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+/* Vanilla CSS: analog film grain — keyframe + SVG data URI Tailwind ile yazılamaz */
+.grain {
+  position: absolute;
+  inset: -50%;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .grain {
+    animation: grain 0.9s steps(6) infinite;
+  }
+}
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  20% {
+    transform: translate(-6%, 4%);
+  }
+  40% {
+    transform: translate(5%, -7%);
+  }
+  60% {
+    transform: translate(-3%, 8%);
+  }
+  80% {
+    transform: translate(7%, 2%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Vanilla CSS: runout halkası sonsuz döner; azaltılmış harekette durur */
+@media (prefers-reduced-motion: no-preference) {
+  .runout-spin {
+    animation: runout 18s linear infinite;
+  }
+}
+@keyframes runout {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Vanilla CSS: dotted leader — liner notes'taki spec satırları için */
+.leader {
+  flex: 1;
+  min-width: 1.5rem;
+  margin-inline: 0.5rem;
+  translate: 0 -0.3em;
+  border-bottom: 1.5px dotted color-mix(in oklab, currentColor 45%, transparent);
+}
+
+/* Vanilla CSS: özel imleç varken yerel imleç gizlenir — UA stilleri (a, button) dahil olmak üzere her yerde */
+.has-cursor,
+.has-cursor * {
+  cursor: none !important;
+}

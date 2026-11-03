@@ -1,0 +1,22 @@
+# dependencies & build
+node_modules
+dist
+
+# tests
+test-results
+playwright-report
+.lighthouseci
+
+# env & logs
+.env
+.env.*
+*.log
+
+# editor / OS
+.DS_Store
+.vscode
+.idea
+
+# local project guide (not published)
+CLAUDE.md
+.claude

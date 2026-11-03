@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Lathe One — a record player built around the needle drop</title>
+    <meta
+      name="description"
+      content="Lathe One is a belt-driven turntable with a walnut plinth, a 4.2 kg aluminum platter and a carbon arm. A concept product by Melih Fidan."
+    />
+    <meta name="theme-color" content="#2A0D10" />
+    <meta property="og:title" content="Lathe One" />
+    <meta property="og:description" content="A record player built around one moment: the needle finding the groove." />
+    <meta property="og:type" content="website" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="root">
+      <!-- Statik preloader: JS inmeden ilk kare çizilsin (FCP). React aynı görünümle bunu devralır. -->
+      <div class="fixed inset-0 z-50 grid place-items-center bg-oxblood text-paper" aria-hidden="true">
+        <div class="flex flex-col items-center gap-10">
+          <svg viewBox="0 0 200 200" class="w-[min(70vw,22rem)]">
+            <circle cx="100" cy="100" r="98" fill="#1a0709" />
+            <circle cx="100" cy="100" r="98" fill="none" stroke="#3a1418" stroke-width="1" />
+            <circle cx="100" cy="100" r="32" fill="#f0b429" />
+            <circle cx="100" cy="100" r="2.4" fill="#2a0d10" />
+          </svg>
+          <p class="flex items-baseline gap-3 font-display text-small">
+            <span>Cutting the lacquer</span><span class="w-[2ch] tabular-nums">00</span>
+          </p>
+        </div>
+      </div>
+    </div>
+    <noscript>
+      <p style="padding:2rem;font-family:serif">Lathe One is a concept turntable. Turn on JavaScript to play the page.</p>
+    </noscript>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
